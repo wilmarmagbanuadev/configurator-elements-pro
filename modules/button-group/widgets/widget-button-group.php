@@ -121,6 +121,21 @@ class Widget_Button_Group extends Widget_Base {
 						'default' => 'left',
 					]
 				);
+				$repeater->add_control(
+					'icon_space',
+					[
+						'label' => esc_html__( 'Icon Space', 'configurator-template-kits-blocks-pro' ),
+						'type' => Controls_Manager::SLIDER,
+						'range' => [
+							'min' => 0,
+							'max' => 50,
+							'step' => 1,
+						],
+
+					]
+				);
+				
+				
 			$repeater->end_controls_tab();
 			// End Layout tab
 			// Start Style tab	
@@ -142,13 +157,7 @@ class Widget_Button_Group extends Widget_Base {
 						'type' => Controls_Manager::COLOR,
 					]
 				);
-				$repeater->add_control(
-					'icon_color_hover',
-					[
-						'label' => esc_html__( 'Icon Color [Hover]', 'configurator-template-kits-blocks-pro' ),
-						'type' => Controls_Manager::COLOR,
-					]
-				);
+				
 				$repeater->add_control(
 					'button_bg',
 					[
@@ -164,69 +173,20 @@ class Widget_Button_Group extends Widget_Base {
 						'style_transfer' => true,
 					]
 				);
-
 				$repeater->add_control(
-					'btn_color_normal',
+					'bg_img',
 					[
-						'label' => __( 'Button Color', 'configurator-template-kits-blocks-pro' ),
-						'type' => Controls_Manager::COLOR,
-						'condition'             => [
-							'button_bg'  => ['color','gradient'],
-						],
-						
-					]
-					
-				);
-				$repeater->add_control(
-					'btn_bg_gradient_location',
-					[
-						'label' => esc_html__( 'Location', 'configurator-template-kits-blocks-pro' ),
-						'type' => Controls_Manager::SLIDER,
-						'range' => [
-							'min' => 0,
-							'max' => 100,
-							'step' => 1,
-							
-						],
+						'label' => esc_html__( 'Background Image', 'plugin-name' ),
+						'type' => \Elementor\Controls_Manager::MEDIA,
 						'default' => [
-							'size' => 0,
+							'url' => \Elementor\Utils::get_placeholder_image_src(),
 						],
 						'condition'   => [
-							'button_bg'  => 'gradient',
+							'button_bg'  => 'image',
 						],
 					]
 				);
-				$repeater->add_control(
-					'btn_color_normal_second',
-					[
-						'label' => __( 'Second Color', 'configurator-template-kits-blocks-pro' ),
-						'type' => Controls_Manager::COLOR,
-						'condition'             => [
-							'button_bg'  => 'gradient',
-						],
-						
-					]
-					
-				);
-				$repeater->add_control(
-					'btn_bg_gradient_location_seconf',
-					[
-						'label' => esc_html__( 'Location', 'configurator-template-kits-blocks-pro' ),
-						'type' => Controls_Manager::SLIDER,
-						'range' => [
-							'min' => 0,
-							'max' => 100,
-							'step' => 1,
-							
-						],
-						'default' => [
-							'size' => 0,
-						],
-						'condition'   => [
-							'button_bg'  => 'gradient',
-						],
-					]
-				);
+		
 				$repeater->add_control(
 					'button_gradient_type',
 					[
@@ -245,6 +205,71 @@ class Widget_Button_Group extends Widget_Base {
 					]
 				);
 				$repeater->add_control(
+					'btn_color_normal',
+					[
+						'label' => __( 'Background Color', 'configurator-template-kits-blocks-pro' ),
+						'type' => Controls_Manager::COLOR,
+						'condition'             => [
+							'button_bg'  => ['color','gradient'],
+						],
+						
+					]
+					
+				);
+				$repeater->add_control(
+					'btn_color_normal_size',
+					[
+						'label' => esc_html__( 'Background Color Size', 'configurator-template-kits-blocks-pro' ),
+						'type' => Controls_Manager::SLIDER,
+						'range' => [
+							'min' => 0,
+							'max' => 100,
+							'step' => 1,
+							
+						],
+						'default' => [
+							'size' => 0,
+						],
+						'condition'   => [
+							'button_bg'  => 'gradient',
+							'button_gradient_type' => 'radial',
+						],
+					]
+				);
+				$repeater->add_control(
+					'btn_color_normal_second',
+					[
+						'label' => __( 'Second Background Color', 'configurator-template-kits-blocks-pro' ),
+						'type' => Controls_Manager::COLOR,
+						'condition'             => [
+							'button_bg'  => 'gradient',
+						],
+						
+					]
+					
+				);
+				$repeater->add_control(
+					'btn_color_normal_size_second',
+					[
+						'label' => esc_html__( 'Second Background Color Size', 'configurator-template-kits-blocks-pro' ),
+						'type' => Controls_Manager::SLIDER,
+						'range' => [
+							'min' => 0,
+							'max' => 100,
+							'step' => 1,
+							
+						],
+						'default' => [
+							'size' => 0,
+						],
+						'condition'   => [
+							'button_bg'  => 'gradient',
+							'button_gradient_type' => 'radial',
+						],
+					]
+				);
+				
+				$repeater->add_control(
 					'btn_bg_gradient_angle',
 					[
 						'label' => esc_html__( 'Gradient Angle', 'configurator-template-kits-blocks-pro' ),
@@ -260,13 +285,28 @@ class Widget_Button_Group extends Widget_Base {
 						],
 						'condition'   => [
 							'button_bg'  => 'gradient',
+							'button_gradient_type' => 'linear',
 						],
+					]
+				);
+				$repeater->add_control(
+					'hr',
+					[
+						'type' => Controls_Manager::DIVIDER,
+					]
+				);
+				// start Hover
+				$repeater->add_control(
+					'icon_color_hover',
+					[
+						'label' => esc_html__( 'Icon Color [Hover]', 'configurator-template-kits-blocks-pro' ),
+						'type' => Controls_Manager::COLOR,
 					]
 				);
 				$repeater->add_control(
 					'btn_color_hover',
 					[
-						'label' => __( 'Button Color [Hover]', 'configurator-template-kits-blocks-pro' ),
+						'label' => __( 'Background Color [Hover]', 'configurator-template-kits-blocks-pro' ),
 						'type' => Controls_Manager::COLOR,
 						'condition'   => [
 							'button_bg'  => ['color','gradient'],
@@ -274,25 +314,178 @@ class Widget_Button_Group extends Widget_Base {
 						
 					]
 				);
-			
 				$repeater->add_control(
-					'icon_space',
+					'btn_color_normal_size_hover',
 					[
-						'label' => esc_html__( 'Icon Space', 'configurator-template-kits-blocks-pro' ),
+						'label' => esc_html__( 'Background Color Size [Hover]', 'configurator-template-kits-blocks-pro' ),
 						'type' => Controls_Manager::SLIDER,
 						'range' => [
 							'min' => 0,
-							'max' => 50,
+							'max' => 100,
 							'step' => 1,
+							
 						],
-
+						'default' => [
+							'size' => 0,
+						],
+						'condition'   => [
+							'button_bg'  => 'gradient',
+							'button_gradient_type' => 'radial',
+						],
+					]
+				);
+				$repeater->add_control(
+					'btn_color_normal_second_hover',
+					[
+						'label' => __( 'Second Background Color [Hover]', 'configurator-template-kits-blocks-pro' ),
+						'type' => Controls_Manager::COLOR,
+						'condition'             => [
+							'button_bg'  => 'gradient',
+						],
+						
+					]
+					
+				);
+				$repeater->add_control(
+					'btn_color_normal_size_second_hover',
+					[
+						'label' => esc_html__( 'Second Background Color Size [Hover]', 'configurator-template-kits-blocks-pro' ),
+						'type' => Controls_Manager::SLIDER,
+						'range' => [
+							'min' => 0,
+							'max' => 100,
+							'step' => 1,
+							
+						],
+						'default' => [
+							'size' => 0,
+						],
+						'condition'   => [
+							'button_bg'  => 'gradient',
+							'button_gradient_type' => 'radial',
+						],
+					]
+				);
+				
+				$repeater->add_control(
+					'btn_bg_gradient_angle_hover',
+					[
+						'label' => esc_html__( 'Gradient Angle [Hover]', 'configurator-template-kits-blocks-pro' ),
+						'type' => Controls_Manager::SLIDER,
+						'range' => [
+							'min' => 0,
+							'max' => 360,
+							'step' => 1,
+							
+						],
+						'default' => [
+							'size' => 0,
+						],
+						'condition'   => [
+							'button_bg'  => 'gradient',
+							'button_gradient_type' => 'linear',
+						],
+					]
+				);
+				$repeater->add_control(
+					'hr',
+					[
+						'type' => Controls_Manager::DIVIDER,
+					]
+				);
+				$repeater->add_control(
+					'btn_border_type',
+					[
+						'label' => __( 'Border Type', 'configurator-elements-pro' ),
+						'type' => Controls_Manager::SELECT,
+						'options' => [
+							'none'=>esc_html__( 'None', 'configurator-elements-pro' ),
+							'solid'=>esc_html__( 'Solid', 'configurator-elements-pro' ),
+							'double'=>esc_html__( 'Double', 'configurator-elements-pro' ),
+							'dotted'=>esc_html__( 'Dotted', 'configurator-elements-pro' ),
+							'dashed'=>esc_html__( 'Dashed', 'configurator-elements-pro' ),
+							'groove'=>esc_html__( 'Groove', 'configurator-elements-pro' ),
+							
+						],
+						'default' => 'none',
+						'style_transfer' => true,
+					]
+				);
+				$repeater->add_control(
+					'btn_border_color',
+					[
+						'label' => esc_html__( 'Border Color', 'configurator-elements-pro' ),
+						'type' => \Elementor\Controls_Manager::COLOR,
+						'condition'   => [
+							'btn_border_type'  =>  [ 'solid','double','dotted','dashed','groove' ],
+						],
+					]
+				);
+				$repeater->add_control(
+					'btn_border',
+					[
+						'label' => esc_html__( 'Border', 'configurator-elements-pro' ),
+						'type' => \Elementor\Controls_Manager::DIMENSIONS,
+						'size_units' => [ 'px','em' ],
+						'condition'   => [
+							'btn_border_type'  =>  [ 'solid','double','dotted','dashed','groove' ],
+						],
+					]
+				);
+				$repeater->add_control(
+					'hr',
+					[
+						'type' => Controls_Manager::DIVIDER,
+					]
+				);
+				// $repeater->add_control(
+				// 	'label_only',
+				// 	[
+				// 		'label' => esc_html__( 'Box Shadow', 'plugin-name' ),
+				// 		'type' => \Elementor\Controls_Manager::HEADING,
+				// 	]
+				// );
+				$repeater->add_control(
+					'show_box_shadow',
+					[
+						'label' => esc_html__( 'Shadow', 'configurator-elements-pro' ),
+						'type' => \Elementor\Controls_Manager::SWITCHER,
+						'label_on' => esc_html__( 'Yes', 'configurator-elements-pro' ),
+						'label_off' => esc_html__( 'No', 'configurator-elements-pro' ),
+						'return_value' => 'yes',
+						'default' => 'no',
+					]
+				);
+				$repeater->add_control(
+					'btn_box_shadow',
+					[
+						'type' => Controls_Manager::BOX_SHADOW,
+						'condition' => [
+							'show_box_shadow' => 'yes',
+						],
+					]
+				);
+			
+				
+			$repeater->end_controls_tab();
+			// End Style tab
+			// Start Transitions tab	
+			$repeater->start_controls_tab('trans_tab',['label' => esc_html__( 'Transition', 'configurator-template-kits-blocks-pro'),]);
+				$repeater->add_control(
+					'have_trans',
+					[
+						'label' => esc_html__( 'Transition', 'configurator-elements-pro' ),
+						'type' => Controls_Manager::SWITCHER,
+						'label_on' => esc_html__( 'Yes', 'your-plugin' ),
+						'label_off' => esc_html__( 'No', 'your-plugin' ),
+						'return_value' => 'mo',
+						'default' => 'no',
 					]
 				);
 			$repeater->end_controls_tab();
-			// End Style tab
-
+			// End Transitions tab	
 		$repeater->end_controls_tabs();
-
+		
 		
 		
 
@@ -597,30 +790,114 @@ class Widget_Button_Group extends Widget_Base {
 			$btn_hash= md5(uniqid(rand(), true));
 			$style_bg = "background-color:".$item['btn_color_normal'].";";
 
+
+			$n_color = ($item['btn_color_normal'])?$item['btn_color_normal']:'#fff';
+			$n_color_size = ($item['btn_color_normal_size']['size'])?$item['btn_color_normal_size']['size'].'%':'0%';
+			
+			$n2_color = ($item['btn_color_normal_second'])?$item['btn_color_normal_second']:'#fff';
+			$n_color_size_second = ($item['btn_color_normal_size_second']['size'])?$item['btn_color_normal_size_second']['size'].'%':'0%';
+			
+			$grad_angle = ($item['btn_bg_gradient_angle']['size'])?$item['btn_bg_gradient_angle']['size'].'deg':'0'.'deg';
+			$grad_type = ($item['button_gradient_type'])?$item['button_gradient_type']:'linear';
+
+
+			// hover
+			$n_color_h = ($item['btn_color_hover'])?$item['btn_color_hover']:'#fff';
+			$n_color_size_h = ($item['btn_color_normal_size_hover']['size'])?$item['btn_color_normal_size_hover']['size'].'%':'0%';
+
+			$n2_color_h = ($item['btn_color_normal_second_hover'])?$item['btn_color_normal_second_hover']:'#fff';
+			$n_color_size_second_h = ($item['btn_color_normal_size_second_hover']['size'])?$item['btn_color_normal_size_second_hover']['size'].'%':'0%';
+
+			$grad_angle_h = ($item['btn_bg_gradient_angle_hover']['size'])?$item['btn_bg_gradient_angle_hover']['size'].'deg':'0'.'deg';
+			
+
+			// border
+			var_dump( $item['btn_box_shadow']);
+			$unit = ($item['btn_border']['unit'])?$item['btn_border']['unit']:null;
+			$border_t = ($item['btn_border']['top'])?$item['btn_border']['top'].$unit:'0'.$unit;
+			$border_r = ($item['btn_border']['right'])?$item['btn_border']['right'].$unit:'0'.$unit;
+			$border_b = ($item['btn_border']['bottom'])?$item['btn_border']['bottom'].$unit:'0'.$unit;
+			$border_l = ($item['btn_border']['left'])?$item['btn_border']['left'].$unit:'0'.$unit;
+			if($item['btn_border']['top']==null && $item['btn_border']['right']==null && $item['btn_border']['bottom']==null && $item['btn_border']['left']==null ){
+				$borders = null;
+			}else{
+				$borders = 'border-width:'.$border_t.' '.$border_r.' '.$border_b.' '.$border_l.';';
+			}
+			$box_shadow = 'box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5) !important;';
+			
+			
+			$transition = 'transition: all ease 0.8s;-moz-transition: all ease 0.8s;-webkit-transition: all ease 0.8s;-ms-transition: all ease 0.8s;-o-transition: all ease 0.8s;';
+			$trans = ($item['have_trans']) ? $transition:'';
 			?>	
 			<style>
 				<?php 
-				switch ($item['button_bg']) {
-					case 'color':
-						echo '.btn-group-'.$btn_hash.'{';
-						echo 'background-color:'.$item['btn_color_normal'].';}';
-						echo '.btn-group-'.$btn_hash.':hover{';
-						echo 'background-color:'.$item['btn_color_hover'].';}';
+				echo '.btn-group-'.$btn_hash.' i{';
+				echo 'color:'.$item['icon_color'].';}';
 
-						echo '.btn-group-'.$btn_hash.'i{';
-						echo 'color:'.$item['icon_color'].';}';
+				echo '.btn-group-'.$btn_hash.':hover i{';
+				echo $trans;
+				echo  'color:'.$item['icon_color_hover'].';}';
 
-						echo '.btn-group-'.$btn_hash.':hover i{';
-						echo  'color:'.$item['icon_color_hover'].';}';
+
+				echo '.btn-group-'.$btn_hash.'{';
+					echo $borders;
+					echo ($item['btn_border_type'])?'border-style:'.$item['btn_border_type'].';':null;
+					echo ($item['btn_border_color'])?'border-color:'.$item['btn_border_color'].';':null;
+					echo $box_shadow;
+					switch ($item['button_bg']) {
+						case 'color':
+							echo 'background-color:'.$item['btn_color_normal'].';';
 						break;
-					case 'gradient':
+						case 'gradient':
+							switch ($grad_type) {
+								case 'linear':
+									echo 'background-image: '.$grad_type.'-gradient('.$grad_angle.', '.$n_color.', '.$n2_color.');';
+								break;
+								case 'radial':
+									echo 'background-image: '.$grad_type.'-gradient( circle,'.$n_color.' '.$n_color_size.', '.$n2_color.' '.$n_color_size_second.');';
+								break;
+								default:
+								echo 'background-image: '.$grad_type.'-gradient('.$grad_angle.', '.$n_color.', '.$n2_color.');';
+								break;
+							}
 						break;
-					case 'image':
+						case 'image':
+							echo 'background-image:url('.$item['bg_img']['url'].');';
+							echo 'background-position:center;background-size: cover;background-repeat: no-repeat;';
 						break;
-					default:
+						default:
 						'color';
+							echo 'background-color:'.$item['btn_color_normal'].';';
 						break;
-				}
+					}
+				echo '}';
+
+				echo '.btn-group-'.$btn_hash.':hover{';
+					echo $trans;
+					switch ($item['button_bg']) {
+						case 'color':
+							echo 'background-color:'.$item['btn_color_hover'].';';
+						break;
+						case 'gradient':
+							switch ($grad_type) {
+								case 'linear':
+									echo 'background-image: '.$grad_type.'-gradient('.$grad_angle_h.', '.$n_color_h.', '.$n2_color_h.');';
+								break;
+								case 'radial':
+									echo 'background-image: '.$grad_type.'-gradient( circle,'.$n_color_h.' '.$n_color_size_h.', '.$n2_color_h.' '.$n_color_size_second_h.');';
+								break;
+								default:
+									echo 'background-image: '.$grad_type.'-gradient('.$grad_angle_h.', '.$n_color_h.', '.$n2_color_h.');';
+								break;
+							}
+						break;
+						default:
+							echo 'background-color:'.$item['btn_color_hover'].';';
+						break;
+					}
+				echo '}';	
+
+	
 				?>
 				
 			</style>		
